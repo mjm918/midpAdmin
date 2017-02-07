@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     try{
         $query = mysqli_query($dbconfig,"select * from admin where username='$username' and pass='$hash'");
         if(mysqli_num_rows($query)>0){
-            echo 'hello';
+            header('location:../home.php');
         }
     }catch (mysqli_sql_exception $e){
         throw $e;
