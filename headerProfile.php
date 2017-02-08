@@ -5,6 +5,8 @@
  * Date: 07/02/2017
  * Time: 04:08
  */
+include ('DBHandler/config.php');
+$user = $_SESSION['username'];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
@@ -30,7 +32,8 @@
             </div>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li style="display:<?php echo $hide;?>"><a href="home.php"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+            <li style=""><a href="#"><span class="glyphicon glyphicon-knight"></span>Welcome <b style="color: white"><?php echo $user;?></b></a></li>
+            <li style=""><a href="home.php"><span class="glyphicon glyphicon-home"></span>Home</a></li>
             <li><a href="./DBHandler/logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         </ul>
     </div>

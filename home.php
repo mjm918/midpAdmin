@@ -5,6 +5,8 @@
  * Date: 07/02/2017
  * Time: 08:13
  */
+include "DBHandler/config.php";
+session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
@@ -24,23 +26,53 @@
 <body>
     <div id="main">
             <div class="container">
-                <h3>Table</h3>
-                <p>Using all the table classes on one table:</p>
+                <p>Users</p>
                 <div class="table-responsive">
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <table class="table table-striped table-bordered table-hover table-condensed">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Firstname</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    $query  = mysqli_query($dbconfig,"select * from premium limit 0,10");
+                                    while($row = mysqli_fetch_array($query)){
+                                        echo '<tr>
+                                    <td>'.$row["fullname"].'</td>
+                                    <td><a>'.$row["email"].'</a></td>
+                                </tr>';
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <p>Waiting for marking</p>
+                <div class="table-responsive">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <table class="table table-striped table-bordered table-hover table-condensed">
+                                <thead>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Anna</td>
+                                    <th>Email</th>
+                                    <th>Exam date</th>
                                 </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $query  = mysqli_query($dbconfig,"select * from record where validate=0 limit 0,10");
+                                while($row = mysqli_fetch_array($query)){
+                                    echo '<tr>
+                                    <td>'.$row["email"].'</td>
+                                    <td>'.$row["date"].'</td>
+                                </tr>';
+                                }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

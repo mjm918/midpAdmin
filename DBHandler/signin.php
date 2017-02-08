@@ -24,7 +24,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     try{
         $query = mysqli_query($dbconfig,"select * from admin where username='$username' and pass='$hash'");
         if(mysqli_num_rows($query)>0){
+            $_SESSION['username'] = $username;
             header('location:../home.php');
+        }else{
+            $msg = "Try again admin. Login failed";
+            echo $msg;
         }
     }catch (mysqli_sql_exception $e){
         throw $e;
