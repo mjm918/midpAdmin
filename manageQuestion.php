@@ -55,7 +55,7 @@ include "DBHandler/config.php";
             </tbody>
         </table>
         <hr>
-        <input style="float: right" type="button" class="btn btn-primary" value="Add question">
+        <a style="text-decoration: none" href="addMcq.php"><input style="float: right" type="button" class="btn btn-primary" value="Add question"></a>
     </div>
 </div>
 <?php include 'sideNav.php';?>

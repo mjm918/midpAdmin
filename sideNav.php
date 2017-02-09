@@ -73,7 +73,7 @@
             outline:none;
             color:#FFF;
             font-size:36px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            box-shadow: 0 6px 6px rgba(0,0,0,0.16), 0 6px 6px rgba(0,0,0,0.23);
             transition:.3s;
             -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
