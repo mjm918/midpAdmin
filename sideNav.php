@@ -23,7 +23,7 @@
             z-index: 1;
             top: 0;
             left: 0;
-            background-color: #111;
+            background-color: #326eaf;
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 60px;
@@ -33,7 +33,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 25px;
-            color: #818181;
+            color: white;
             display: block;
             transition: 0.3s
         }
@@ -90,12 +90,12 @@
 
 <div id="mySidenav" class="sidenav">
     <a style="text-decoration: none" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">All users</a>
-    <a href="#">Assign admin</a>
+    <a href="allUsers.php">All users</a>
+    <a href="#">Manage users and Admin</a>
     <a href="#">Check paper</a>
-    <a href="#">Change password</a>
-    <a href="#">Manage question</a>
+    <a href="manageQuestion.php">Manage question</a>
     <a href="#">Upload videos</a>
+    <a href="#">Setup site</a>
 </div>
 
 <div id="main">

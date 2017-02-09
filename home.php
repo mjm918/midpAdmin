@@ -6,7 +6,6 @@
  * Time: 08:13
  */
 include "DBHandler/config.php";
-session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
@@ -14,7 +13,6 @@ session_start();
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <!--For Mobile rendering-->
     <link rel="stylesheet" href="CSS/style.css">
-    <script src="http://bootboxjs.com/bootbox.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
@@ -26,7 +24,7 @@ session_start();
 <body>
     <div id="main">
             <div class="container">
-                <p>Users</p>
+                <b><p style="color: coral">Users</p></b>
                 <div class="table-responsive">
                     <div class="panel-group">
                         <div class="panel panel-default">
@@ -43,7 +41,7 @@ session_start();
                                     while($row = mysqli_fetch_array($query)){
                                         echo '<tr>
                                     <td>'.$row["fullname"].'</td>
-                                    <td><a>'.$row["email"].'</a></td>
+                                    <td><a href="viewUser.php?email='.$row["email"].'">'.$row["email"].'</a></td>
                                 </tr>';
                                     }
                                 ?>
@@ -52,7 +50,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                <p>Waiting for marking</p>
+                <b><p style="color: coral">Waiting for marking</p></b>
                 <div class="table-responsive">
                     <div class="panel-group">
                         <div class="panel panel-default">
@@ -68,7 +66,7 @@ session_start();
                                 $query  = mysqli_query($dbconfig,"select * from record where validate=0 limit 0,10");
                                 while($row = mysqli_fetch_array($query)){
                                     echo '<tr>
-                                    <td>'.$row["email"].'</td>
+                                    <td><a href="viewUser.php?email='.$row["email"].'">'.$row["email"].'</a></td>
                                     <td>'.$row["date"].'</td>
                                 </tr>';
                                 }
