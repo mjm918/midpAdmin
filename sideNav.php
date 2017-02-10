@@ -91,10 +91,10 @@
 <div id="mySidenav" class="sidenav">
     <a style="text-decoration: none" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="allUsers.php">All users</a>
-    <a href="#">Manage users and Admin</a>
+    <a href="manageUsers.php">Manage users and Admin</a>
     <a href="#">Check paper</a>
     <a href="manageQuestion.php">Manage question</a>
-    <a href="#">Upload videos</a>
+    <a href="upload.php">Upload videos</a>
     <a href="#">Setup site</a>
 </div>
 

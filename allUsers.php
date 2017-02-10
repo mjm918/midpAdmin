@@ -21,6 +21,7 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <!--For Mobile rendering-->
     <link rel="stylesheet" href="CSS/style.css">
+    <link href="Assets/midp.ico" rel="shortcut icon" type="image/x-icon" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"/>
@@ -30,7 +31,6 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
 </head>
 <?php include "headerProfile.php";?>
 <body>
-<?php include ('sideNav.php');?>
 <div id="main">
 <div class="container">
     <h4>User details</h4>
@@ -131,6 +131,7 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
     </div>
 </div>
 </div>
+<?php include ('sideNav.php');?>
 </body>
 <?php include "footer.php";?>
 </html>

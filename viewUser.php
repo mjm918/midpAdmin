@@ -7,6 +7,7 @@
  */
 include ('DBHandler/config.php');
 session_start();
+$tableHide = "";
 if(isset($_GET['email'])){$email=$_GET['email'];}
 $query = mysqli_query($dbconfig,"select * from premium where email='$email'");
 while($row = mysqli_fetch_array($query)){
@@ -27,15 +28,44 @@ $res = $sql->fetch_assoc();
 $date = $res['date'];
 $marks = $res['mcq'];
 $theory = $res['theory'];
+
+$grade_marks = (int)$marks+(int)$theory;
+
+$grade = "";
+if(($grade_marks>=80)){
+    $grade = "A";
+}
+if($grade_marks>=60 && $grade_marks<=79){
+    $grade = "B";
+}
+if($grade_marks>=41 && $grade_marks<=59){
+    $grade = "C";
+}
+if($grade_marks>=20 && $grade_marks<=39){
+    $grade = "D";
+}
+if($grade_marks>=10 && $grade_marks<=19){
+    $grade = "E";
+}
+if($grade_marks>=0 && $grade_marks<=9){
+    $grade = "F";
+}
 if($date==""){
     $date = "Not Attempted yet";
+    $tableHide = "display:none";
+    $grade = "";
 }
 if($marks==""){
-    $result = "Not marked yet";
+    $marks = "NULL";
 }else{
     $display = "display:none";
-    $result = $marks;
 }
+if($theory ==""){
+    $theory = "NULL";
+}else{
+    $display = "display:none";
+}
+
 $check_marking = mysqli_query($dbconfig,"select validate from mcq_answers where email='$email'");
 $valid = $check_marking->fetch_assoc();
 $is_valid = $valid['validate'];
@@ -51,6 +81,7 @@ if($is_valid == "0"){
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <!--For Mobile rendering-->
+    <link href="Assets/midp.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="stylesheet" href="CSS/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -167,7 +198,9 @@ if($is_valid == "0"){
                         </tr>
                         <tr>
                             <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Result </span></b></h5></td>
-                            <td><b style="color: #326eaf">MCQ - </b><b style="color: coral"><?php echo $result;?></b></td>
+                            <td><b style="color: #326eaf">MCQ - </b><b style="color: coral"><?php echo $marks;?></b>
+                                <b style="color: #326eaf">Theory - </b><b style="color: coral"><?php echo $theory;?></b>
+                                <b><?php echo $grade;?></b></td>
                         </tr>
                         <tr style="<?php echo $display;?>">
                             <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check MCQ Answers </span></b></h5></td>
@@ -187,30 +220,31 @@ if($is_valid == "0"){
         </div>
     </div>
     <hr>
-    <b><h3 style="color: #326eaf">MCQ Answers</h3></b>
-    <table style="<?php echo $hide_it;?>;margin-bottom: 200px" class="table">
-        <thead>
-        <tr>
-            <th>Question</th>
-            <th>Given Ans</th>
-            <th>Correct Ans</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        $titties = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks='0'");
-        while ($small_titties = mysqli_fetch_array($titties)){
-            $q = $small_titties['question'];
-            $a = $small_titties['answer'];
-            $c = $small_titties['correct'];
-            echo '<tr class="danger">
+    <div style="<?php echo $tableHide;?>">
+        <b><h3 style="color: #326eaf">MCQ Answers</h3></b>
+        <table style="<?php echo $hide_it;?>;margin-bottom: 200px" class="table">
+            <thead>
+            <tr>
+                <th>Question</th>
+                <th>Given Ans</th>
+                <th>Correct Ans</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $titties = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks='0'");
+            while ($small_titties = mysqli_fetch_array($titties)){
+                $q = $small_titties['question'];
+                $a = $small_titties['answer'];
+                $c = $small_titties['correct'];
+                echo '<tr class="danger">
             <td>'.$q.'</td>
             <td>'.$a.'</td>
             <td>'.$c.'</td>
         </tr>';
-        }
-        ?>
-        <?php
+            }
+            ?>
+            <?php
             $boobies = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks!='0'");
             $score_q = mysqli_query($dbconfig,"select * from policy where name='marks'");
             $num_row = $score_q->fetch_assoc();
@@ -229,9 +263,10 @@ if($is_valid == "0"){
             <td>Correct answer</td>
         </tr>';
             }
-        ?>
-        </tbody>
-    </table>
+            ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 </div>
 <?php include ('sideNav.php');?>

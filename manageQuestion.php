@@ -22,7 +22,7 @@ include "DBHandler/config.php";
 </head>
 <?php include'headerProfile.php';?>
 <body>
-<div id="main">
+<div style="margin-bottom: 100px" id="main">
     <div class="container">
         <h2 style="color: #326eaf">MCQ Questions</h2>
         <table class="table table-hover">
@@ -56,6 +56,28 @@ include "DBHandler/config.php";
         </table>
         <hr>
         <a style="text-decoration: none" href="addMcq.php"><input style="float: right" type="button" class="btn btn-primary" value="Add question"></a>
+        <h2 style="color: #326eaf">Theory Questions</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr style="color: coral">
+                <th>Question</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $mcq = mysqli_query($dbconfig,"select * from theoryquestion");
+            while ($r = mysqli_fetch_array($mcq)):
+                ?>
+                <tr>
+                    <td><?php echo $r['question']?></td>
+                    <td><a style="text-decoration: none" href="editTheory.php?edit=<?php echo $r['id'];?>"><input type="button" class="btn btn-warning" value="Edit"></a></td>
+                    <td><a style="text-decoration: none" href="./DBHandler/deleteTheory.php?delete=<?php echo $r['id'];?>"><input type="button" class="btn btn-danger" value="Delete"></a></td>
+                </tr>
+            <?php endwhile;?>
+            </tbody>
+        </table>
+        <hr>
+        <a style="text-decoration: none" href="addTheory.php"><input style="float: right" type="button" class="btn btn-primary" value="Add question"></a>
     </div>
 </div>
 <?php include 'sideNav.php';?>
