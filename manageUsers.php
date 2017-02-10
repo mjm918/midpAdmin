@@ -13,19 +13,36 @@ if(isset($_GET['msg'])){
 }else{
     $msg = "";
 }
+if(isset($_GET['notify'])){
+    $notify = $_GET['notify'];
+    $hide = "";
+}else{
+    $notify = "";
+}
 if(isset($_POST["submit"])){
     $search = $_POST['search'];
 
     $query = mysqli_query($dbconfig,"select * from premium where email='$search'");
-    $res = $query->fetch_assoc();
-    $name = $res['fullname'];
-    $ic = $res['ic'];
-    $mobile = $res['mobile'];
-    $state = $res['state'];
-    $school = $res['school'];
-    $pid = $res['pid'];
-    $pmid = $res['pmid'];
-
+    if(mysqli_num_rows($query) == 0){
+        $query = mysqli_query($dbconfig,"select * from admin where username='$search'");
+        $res = $query->fetch_assoc();
+        $name = $res['username'];
+        $ic = "NULL";
+        $mobile = "NULL";
+        $state = "NULL";
+        $school = "NULL";
+        $pid = "NULL";
+        $pmid = "NULL";
+    }else{
+        $res = $query->fetch_assoc();
+        $name = $res['fullname'];
+        $ic = $res['ic'];
+        $mobile = $res['mobile'];
+        $state = $res['state'];
+        $school = $res['school'];
+        $pid = $res['pid'];
+        $pmid = $res['pmid'];
+    }
     $display = "";
 
 }else{
@@ -119,7 +136,7 @@ if(isset($_POST["submit"])){
                 <div class="card">
                     <div class="card-content">
                         <H2 style="color: coral;" class="card-title"><?php echo $name;?></H2>
-                        <p style="color: #326eaf"><?php echo $search;?></p>
+                        <a href="viewUser.php?email=<?php echo $search?>"><p style="color: #326eaf"><?php echo $search;?></p></a>
                     </div>
 
                     <div class="card-action">
@@ -176,7 +193,7 @@ if(isset($_POST["submit"])){
                             </div>
                             <input style="background-color: #326eaf" name="submit" type="submit" value="Assign" class="btn btn-info btn-block">
                         </form>
-                        <p style="<?php echo $hide?>"><?php echo $msg;?></p>
+                        <p style="color: #326eaf;<?php echo $hide?>"><?php echo $msg;?></p>
                     </div>
                 </div>
             </div>
@@ -191,12 +208,12 @@ if(isset($_POST["submit"])){
                                 <input type="email" pattern=".{3,40}" required title="3 to 40 characters" name="email" id="email" class="form-control" required="required" placeholder="Email address">
                             </div>
                             <div class="form-group">
-                                <label class="radio-inline"><input type="radio" name="optradio">Premium</label>
-                                <label class="radio-inline"><input type="radio" name="optradio">Normal</label>
+                                <label class="radio-inline"><input type="radio" value="Premium" id="optradio" name="optradio">Premium</label>
+                                <label class="radio-inline"><input type="radio" value="Normal" id="optradio" name="optradio">Normal</label>
                             </div>
                             <input style="background-color: #326eaf" name="submit" type="submit" value="Change status" class="btn btn-info btn-block">
                         </form>
-                        <p style="<?php echo $hide?>"><?php echo $msg;?></p>
+                        <p style="color: #326eaf;<?php echo $hide?>"><?php echo $notify;?></p>
                     </div>
                 </div>
             </div>

@@ -9,12 +9,24 @@ include "config.php";
 if(isset($_POST['submit'])){
     $email = $_POST['email'];
 
-    $query = mysqli_query($dbconfig,"delete from premium where email = '$email'");
+    $check = mysqli_query($dbconfig,"select * from premium where email='$email'");
 
-    if($query){
-        header('location:../manageUsers.php');
+    if(mysqli_num_rows($check) == 0){
+        $query = mysqli_query($dbconfig,"delete from admin where username = '$email'");
+
+        if($query){
+            header('location:../manageUsers.php');
+        }else{
+            echo 'try again';
+        }
     }else{
-        echo 'try again';
+        $query = mysqli_query($dbconfig,"delete from premium where email = '$email'");
+
+        if($query){
+            header('location:../manageUsers.php');
+        }else{
+            echo 'try again';
+        }
     }
 }
 ?>

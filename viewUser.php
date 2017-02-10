@@ -75,6 +75,11 @@ if($is_valid == "0"){
 }else{
     $display = "display:none";
 }
+$check_theory = mysqli_query($dbconfig,"select * from theoryanswer where email='$email' and validate='0'");
+$hide_theory = "display:none";
+if(mysqli_num_rows($check_theory)>0){
+    $hide_theory = "";
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
@@ -155,119 +160,145 @@ if($is_valid == "0"){
 <?php include ('headerProfile.php');?>
 <body>
 <div id="main">
-<div class="container">
-    <div class="row">
-        <!-- Card Projects -->
-        <div style="margin-bottom: 50px" class="col-md-6 col-md-offset-3">
-            <div class="card">
-                <div class="card-image">
-                    <img style="margin-left: auto;margin-right: auto;display: block;" class="img-responsive" width="200" height="350" src="Assets/user.png">
-                </div>
+    <div class="container">
+        <div class="row">
+            <!-- Card Projects -->
+            <div style="margin-bottom: 50px" class="col-md-6 col-md-offset-3">
+                <div class="card">
+                    <div class="card-image">
+                        <img style="margin-left: auto;margin-right: auto;display: block;" class="img-responsive" width="200" height="350" src="Assets/user.png">
+                    </div>
 
-                <div class="card-content">
-                    <span style="color: coral;" class="card-title"><?php echo $name;?></span>
-                    <p style="color: #326eaf"><?php echo $email;?></p>
-                </div>
+                    <div class="card-content">
+                        <span style="color: coral;" class="card-title"><?php echo $name;?></span>
+                        <p style="color: #326eaf"><?php echo $email;?></p>
+                    </div>
 
-                <div class="card-action">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td><a style="text-decoration: none;font-weight: 700" href="https://www.google.com/search?q=<?php echo $school;?>" target="new_blank"><span style="color: #326eaf">School </span></td>
-                            <td><a style="text-decoration: none" href="https://www.google.com/search?q=<?php echo $school;?>" target="new_blank"><b style="color: coral"><?php echo $school;?></b></a></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">IC </span></b></h5></td>
-                            <td><b style="color: coral"><?php echo $ic;?></b></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">State </span></b></h5></td>
-                            <td><b style="color: coral"><?php echo $state;?></b></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Mobile </span></b></h5></td>
-                            <td><b style="color: coral"><?php echo $mobile;?></b></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Status </span></b></h5></td>
-                            <td><b style="color: coral"><?php echo $premium;?></b></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Date of exam taken </span></b></h5></td>
-                            <td><b style="color: coral"><?php echo $date;?></b></td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Result </span></b></h5></td>
-                            <td><b style="color: #326eaf">MCQ - </b><b style="color: coral"><?php echo $marks;?></b>
-                                <b style="color: #326eaf">Theory - </b><b style="color: coral"><?php echo $theory;?></b>
-                                <b><?php echo $grade;?></b></td>
-                        </tr>
-                        <tr style="<?php echo $display;?>">
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check MCQ Answers </span></b></h5></td>
-                            <td><form action="Util/checkMCQ.php" method="post">
-                                    <input name="email" id="email" value="<?php echo $email;?>" style="display: none"/>
-                                    <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Check now!"/>
-                                </form> </td>
-                        </tr>
-                        <tr>
-                            <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check Thoery Answers </span></b></h5></td>
-                            <td><input name="theory" id="theory" type="button" class="btn btn-primary" value="Check now!"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="card-action">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td><a style="text-decoration: none;font-weight: 700" href="https://www.google.com/search?q=<?php echo $school;?>" target="new_blank"><span style="color: #326eaf">School </span></td>
+                                <td><a style="text-decoration: none" href="https://www.google.com/search?q=<?php echo $school;?>" target="new_blank"><b style="color: coral"><?php echo $school;?></b></a></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">IC </span></b></h5></td>
+                                <td><b style="color: coral"><?php echo $ic;?></b></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">State </span></b></h5></td>
+                                <td><b style="color: coral"><?php echo $state;?></b></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Mobile </span></b></h5></td>
+                                <td><b style="color: coral"><?php echo $mobile;?></b></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Status </span></b></h5></td>
+                                <td><b style="color: coral"><?php echo $premium;?></b></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Date of exam taken </span></b></h5></td>
+                                <td><b style="color: coral"><?php echo $date;?></b></td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Result </span></b></h5></td>
+                                <td><b style="color: #326eaf">MCQ - </b><b style="color: coral"><?php echo $marks;?></b>
+                                    <b style="color: #326eaf">Theory - </b><b style="color: coral"><?php echo $theory;?></b>
+                                    <b><?php echo $grade;?></b></td>
+                            </tr>
+                            <tr style="<?php echo $display;?>">
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check MCQ Answers </span></b></h5></td>
+                                <td><form action="Util/checkMCQ.php" method="post">
+                                        <input name="email" id="email" value="<?php echo $email;?>" style="display: none"/>
+                                        <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Check now!"/>
+                                    </form> </td>
+                            </tr>
+                            <tr style="<?php echo $hide_theory?>">
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check Thoery Answers </span></b></h5></td>
+                                <td>
+                                    <a href="checkSubjective.php?email=<?php echo $email;?>" style="text-decoration: none">
+                                        <input name="theory" id="theory" type="button" class="btn btn-primary" value="Check now!"/>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div style="<?php echo $tableHide;?>">
-        <b><h3 style="color: #326eaf">MCQ Answers</h3></b>
-        <table style="<?php echo $hide_it;?>;margin-bottom: 200px" class="table">
-            <thead>
-            <tr>
-                <th>Question</th>
-                <th>Given Ans</th>
-                <th>Correct Ans</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $titties = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks='0'");
-            while ($small_titties = mysqli_fetch_array($titties)){
-                $q = $small_titties['question'];
-                $a = $small_titties['answer'];
-                $c = $small_titties['correct'];
-                echo '<tr class="danger">
+        <hr>
+        <div style="<?php echo $tableHide;?>;margin-bottom: 200px">
+            <b><h3 style="color: #326eaf">MCQ Answers</h3></b>
+            <table style="<?php echo $hide_it;?>;" class="table">
+                <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Given Ans</th>
+                    <th>Correct Ans</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $titties = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks='0'");
+                while ($small_titties = mysqli_fetch_array($titties)){
+                    $q = $small_titties['question'];
+                    $a = $small_titties['answer'];
+                    $c = $small_titties['correct'];
+                    echo '<tr class="danger">
             <td>'.$q.'</td>
             <td>'.$a.'</td>
             <td>'.$c.'</td>
         </tr>';
-            }
-            ?>
-            <?php
-            $boobies = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks!='0'");
-            $score_q = mysqli_query($dbconfig,"select * from policy where name='marks'");
-            $num_row = $score_q->fetch_assoc();
-            $score = $num_row['description'];
-            $int = (int)$score;
-            $total_c = mysqli_num_rows($boobies);
-            $total_mark = $int*$total_c;
-            $insert_record = mysqli_query($dbconfig,"update record set mcq='$total_mark' WHERE email='$email'");
+                }
+                ?>
+                <?php
+                $boobies = mysqli_query($dbconfig,"select * from mcq_answers where email='$email' and marks!='0'");
+                $score_q = mysqli_query($dbconfig,"select * from policy where name='marks'");
+                $num_row = $score_q->fetch_assoc();
+                $score = $num_row['description'];
+                $int = (int)$score;
+                $total_c = mysqli_num_rows($boobies);
+                $total_mark = $int*$total_c;
+                $insert_record = mysqli_query($dbconfig,"update record set mcq='$total_mark' WHERE email='$email'");
 
-            while ($small_boobies = mysqli_fetch_array($boobies)){
-                $q_a = $small_boobies['question'];
-                $a_a = $small_boobies['answer'];
-                echo '<tr class="success">
+                while ($small_boobies = mysqli_fetch_array($boobies)){
+                    $q_a = $small_boobies['question'];
+                    $a_a = $small_boobies['answer'];
+                    echo '<tr class="success">
             <td>'.$q_a.'</td>
             <td>'.$a_a.'</td>
             <td>Correct answer</td>
         </tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+            <hr>
+            <b><h3 style="color: #326eaf">Theory Answers & Comment</h3></b>
+            <?php
+            $view = mysqli_query($dbconfig,"select* from theoryanswer where email='$email' and validate='1'");
+            while ($s = mysqli_fetch_array($view)){
+                echo '<div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 style="color: #326eaf">Question:</h3>
+                <h4 style="color: coral">'.$s['question'].'</h4>
+            </div>
+            <div class="panel-heading"><h4 style="color: #326eaf">Answer:</h4></div>
+            <div class="panel-body"><p style="text-align: justify"><mark>'.$s['answer'].'</mark></p></div>
+            <div class="panel-body">
+                <h4 style="color: #326eaf">Comment:</h4>
+                <pre>
+                    '.$s['comment'].'
+                </pre>
+                <h4 style="color:coral">Score :'.$s['marks'].'</h4>
+            </div>
+        </div>';
             }
             ?>
-            </tbody>
-        </table>
+        </div>
     </div>
-</div>
 </div>
 <?php include ('sideNav.php');?>
 </body>
