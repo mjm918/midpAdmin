@@ -25,6 +25,7 @@ include "DBHandler/config.php";
 <div style="margin-bottom: 100px" id="main">
     <div class="container">
         <h2 style="color: #326eaf">MCQ Questions</h2>
+        <hr>
         <table class="table table-hover">
             <thead>
             <tr style="color: coral">
@@ -57,6 +58,7 @@ include "DBHandler/config.php";
         <hr>
         <a style="text-decoration: none" href="addMcq.php"><input style="float: right" type="button" class="btn btn-primary" value="Add question"></a>
         <h2 style="color: #326eaf">Theory Questions</h2>
+        <hr>
         <table class="table table-hover">
             <thead>
             <tr style="color: coral">

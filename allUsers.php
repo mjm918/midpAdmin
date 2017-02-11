@@ -7,7 +7,7 @@
  */
 include "DBHandler/config.php";
 session_start();
-$num_rec_per_page=1;
+$num_rec_per_page=10;
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 if (isset($_GET["resit"])) { $resit_page  = $_GET["resit"]; } else { $resit_page=1; };
 $start_from = ($page-1) * $num_rec_per_page;
@@ -33,7 +33,8 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
 <body>
 <div id="main">
 <div class="container">
-    <h4>User details</h4>
+    <h2 style="color:  #326eaf">User details</h2>
+    <hr>
     <div class="table-responsive">
         <div class="panel-group">
             <div class="panel panel-default">
@@ -81,7 +82,8 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
             ?>
         </div>
     </div>
-    <h4>User for resit</h4>
+    <h2 style="color:  #326eaf">User for resit</h2>
+    <hr>
     <div class="table-responsive">
         <div class="panel-group">
             <div class="panel panel-default">
@@ -117,7 +119,7 @@ $rs_result = mysqli_query ($dbconfig,"SELECT * FROM premium LIMIT $start_from, $
             $total_records = mysqli_num_rows($rs_result);
             $total_pages = ceil($total_records / $num_rec_per_page);
 
-            echo '<nav aria-label="Page navigation example">
+            echo '<nav aria-label="Page navigation">
                     <ul class="pagination">
                       <li class="page-item"><a class="page-link" href="allUsers.php?resit='.($resit_page-1).'">Previous</a></li>';
             for ($i=1; $i<=$total_pages; $i++) {

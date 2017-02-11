@@ -24,7 +24,8 @@ include "DBHandler/config.php";
 <body>
     <div id="main">
             <div class="container">
-                <b><p style="color: coral">Users</p></b>
+                <h2 style="color: #326eaf">Users</h2>
+                <hr>
                 <div class="table-responsive">
                     <div class="panel-group">
                         <div class="panel panel-default">
@@ -45,12 +46,18 @@ include "DBHandler/config.php";
                                 </tr>';
                                     }
                                 ?>
+                                <tr>
+                                    <td></td>
+                                    <td><a href="allUsers.php" style="text-decoration:none;float: right">Show all..</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <b><p style="color: coral">Waiting for marking</p></b>
+                <hr>
+                <h2 style="color:  #326eaf">Waiting for marking</h2>
+                <hr>
                 <div class="table-responsive">
                     <div class="panel-group">
                         <div class="panel panel-default">
@@ -71,6 +78,10 @@ include "DBHandler/config.php";
                                 </tr>';
                                 }
                                 ?>
+                                <tr>
+                                    <td></td>
+                                    <td><a href="allUsers.php" style="text-decoration:none;float: right">Show all..</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -95,7 +95,7 @@
     <a href="checkPaper.php">Check paper</a>
     <a href="manageQuestion.php">Manage question</a>
     <a href="upload.php">Upload videos</a>
-    <a href="#">Setup site</a>
+    <a href="setup.php">Setup site</a>
 </div>
 
 <div id="main">

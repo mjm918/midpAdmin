@@ -24,7 +24,8 @@ include "DBHandler/config.php";
 <div id="main">
     <div class="container">
         <h2 style="color: #326eaf">Check MCQ & Subjective Answers</h2>
-       <!----> <div class="table-responsive">
+        <hr>
+       <div class="table-responsive">
             <div class="panel-group">
                 <div class="panel panel-default">
                     <table class="table table-striped table-bordered table-hover table-condensed">

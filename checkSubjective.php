@@ -9,6 +9,7 @@ include "DBHandler/config.php";
 session_start();
 if(isset($_GET['email'])){
     $email = $_GET['email'];
+    $_SESSION['newEmail'] = $email;
 }
 if(isset($_POST['submit'])){
     $comment = htmlspecialchars($_POST['comment']);
@@ -19,7 +20,8 @@ if(isset($_POST['submit'])){
         $valid = mysqli_query($dbconfig,"update theoryanswer set validate='1' where id='$id'");
     }
 }
-$check = mysqli_query($dbconfig,"select * from theoryanswer where email='$email' and validate='0'");
+$em = $_SESSION['newEmail'];
+$check = mysqli_query($dbconfig,"select * from theoryanswer where email='$em' and validate='0'");
 $hide_c = "";
 $show_btn = "display:none";
 if(mysqli_num_rows($check) == 0){
@@ -45,7 +47,7 @@ if(mysqli_num_rows($check) == 0){
     <div class="container">
         <div style="<?php echo $hide_c;?>">
             <?php
-            $query = mysqli_query($dbconfig,"select * from theoryanswer where email='$email' and validate='0'");
+            $query = mysqli_query($dbconfig,"select * from theoryanswer where email='$em' and validate='0'");
             while($row = mysqli_fetch_array($query)):?>
                 <h3 style="color: #326eaf"><?php echo "Question : ";?></h3>
                 <h3 style="color: coral"><?php echo $row['question']?></h3>
@@ -69,7 +71,7 @@ if(mysqli_num_rows($check) == 0){
             endwhile;?>
         </div>
         <div style="text-align: center;<?php echo $show_btn;?>">
-            <a href="Util/generateResult.php?email=<?php echo $email?>" style="margin: 0 auto; text-decoration: none">
+            <a href="Util/generateResult.php?email=<?php echo $em?>" style="margin: 0 auto; text-decoration: none">
                 <input class="btn btn-warning" type="submit" value="Generate Result">
             </a>
         </div>

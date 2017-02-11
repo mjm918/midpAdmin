@@ -46,6 +46,7 @@ if(isset($_POST['submit'])){
 <div id="main">
     <div class="container">
         <h1 style="color: #326eaf">Edit Subjective Question,Answer and Choices</h1>
+        <hr>
         <div class="row">
             <div class="col-sm-6" style="margin-left: 10px;margin-bottom: 100px">
                 <form action="editTheory.php" method="post">

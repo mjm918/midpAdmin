@@ -31,7 +31,7 @@ $theory = $res['theory'];
 
 $grade_marks = (int)$marks+(int)$theory;
 
-$grade = "";
+$grade = "NULL";
 if(($grade_marks>=80)){
     $grade = "A";
 }
@@ -50,6 +50,9 @@ if($grade_marks>=10 && $grade_marks<=19){
 if($grade_marks>=0 && $grade_marks<=9){
     $grade = "F";
 }
+
+$grade_query = mysqli_query($dbconfig,"update record set grade='$grade' WHERE email = '$email'");
+
 if($date==""){
     $date = "Not Attempted yet";
     $tableHide = "display:none";
@@ -201,11 +204,11 @@ if(mysqli_num_rows($check_theory)>0){
                                 <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Date of exam taken </span></b></h5></td>
                                 <td><b style="color: coral"><?php echo $date;?></b></td>
                             </tr>
-                            <tr>
+                            <tr class="success" style="font-size: 18px">
                                 <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Result </span></b></h5></td>
                                 <td><b style="color: #326eaf">MCQ - </b><b style="color: coral"><?php echo $marks;?></b>
                                     <b style="color: #326eaf">Theory - </b><b style="color: coral"><?php echo $theory;?></b>
-                                    <b><?php echo $grade;?></b></td>
+                                    <b style="color: #326eaf">Grade - </b><b style="color: coral"><?php echo $grade;?></b>
                             </tr>
                             <tr style="<?php echo $display;?>">
                                 <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Check MCQ Answers </span></b></h5></td>
@@ -219,6 +222,14 @@ if(mysqli_num_rows($check_theory)>0){
                                 <td>
                                     <a href="checkSubjective.php?email=<?php echo $email;?>" style="text-decoration: none">
                                         <input name="theory" id="theory" type="button" class="btn btn-primary" value="Check now!"/>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Generate result </span></b></h5></td>
+                                <td>
+                                    <a href="./Util/generateResult.php?email=<?php echo $email;?>" style="text-decoration: none">
+                                        <input name="theory" id="theory" type="button" class="btn btn-warning" value="Generate now!"/>
                                     </a>
                                 </td>
                             </tr>

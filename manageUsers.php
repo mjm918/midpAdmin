@@ -31,8 +31,6 @@ if(isset($_POST["submit"])){
         $mobile = "NULL";
         $state = "NULL";
         $school = "NULL";
-        $pid = "NULL";
-        $pmid = "NULL";
     }else{
         $res = $query->fetch_assoc();
         $name = $res['fullname'];
@@ -40,8 +38,6 @@ if(isset($_POST["submit"])){
         $mobile = $res['mobile'];
         $state = $res['state'];
         $school = $res['school'];
-        $pid = $res['pid'];
-        $pmid = $res['pmid'];
     }
     $display = "";
 
@@ -121,7 +117,8 @@ if(isset($_POST["submit"])){
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>User search field</h2>
+                <h2 style="color: #326eaf">User search field</h2>
+                <hr>
                 <form action="manageUsers.php" method="post" class="search-form">
                     <div class="form-group has-feedback">
                         <label for="search" class="sr-only">Search</label>
@@ -157,14 +154,6 @@ if(isset($_POST["submit"])){
                             <tr>
                                 <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Mobile </span></b></h5></td>
                                 <td><b style="color: coral"><?php echo $mobile;?></b></td>
-                            </tr>
-                            <tr>
-                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">PAY-ID </span></b></h5></td>
-                                <td><b style="color: coral"><?php echo $pid;?></b></td>
-                            </tr>
-                            <tr>
-                                <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">PAYMENT-ID </span></b></h5></td>
-                                <td><b style="color: coral"><?php echo $pmid;?></b></td>
                             </tr>
                             <tr>
                                 <td><a style="text-decoration: none; href="#" target="new_blank"><b><span style="color: #326eaf">Delete user </span></b></h5></td>
